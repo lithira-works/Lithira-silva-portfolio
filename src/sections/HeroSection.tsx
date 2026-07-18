@@ -1,8 +1,18 @@
+import { Github, Linkedin } from 'lucide-react';
 import FadeIn from '../components/FadeIn';
 import Magnet from '../components/Magnet';
 import ContactButton from '../components/ContactButton';
 
 const NAV_LINKS = ['About', 'Price', 'Projects', 'Contact'];
+
+const SOCIAL_LINKS = [
+  { icon: Github, href: 'https://github.com/lithira-works', label: 'GitHub' },
+  {
+    icon: Linkedin,
+    href: 'https://www.linkedin.com/in/lithira-silva-20b42a370/',
+    label: 'LinkedIn',
+  },
+];
 
 const PORTRAIT_URL =
   'https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png';
@@ -13,15 +23,32 @@ export default function HeroSection() {
       {/* Navbar */}
       <FadeIn as="nav" y={-20} delay={0}>
         <div className="flex items-center justify-between px-6 pt-6 md:px-10 md:pt-8">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="text-sm font-medium uppercase tracking-wider text-[#D7E2EA] transition-opacity duration-200 hover:opacity-70 md:text-lg lg:text-[1.4rem]"
-            >
-              {link}
-            </a>
-          ))}
+          <div className="flex items-center gap-5 sm:gap-7 md:gap-9 lg:gap-11">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link}
+                href={`#${link.toLowerCase()}`}
+                className="text-sm font-medium uppercase tracking-wider text-[#D7E2EA] transition-opacity duration-200 hover:opacity-70 md:text-lg lg:text-[1.4rem]"
+              >
+                {link}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-1 sm:gap-2">
+            {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="rounded-full p-2 text-[#D7E2EA] transition-colors duration-200 hover:bg-[#D7E2EA]/10 hover:text-white"
+              >
+                <Icon className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
+              </a>
+            ))}
+          </div>
         </div>
       </FadeIn>
 
