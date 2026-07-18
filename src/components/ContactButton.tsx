@@ -1,12 +1,20 @@
-interface ContactButtonProps {
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+
+interface ContactButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   className?: string;
+  children?: ReactNode;
 }
 
-export default function ContactButton({ className = '' }: ContactButtonProps) {
+export default function ContactButton({
+  className = '',
+  children = 'Contact Me',
+  type = 'button',
+  ...props
+}: ContactButtonProps) {
   return (
     <button
-      type="button"
-      className={`rounded-full px-8 py-3 text-xs font-medium uppercase tracking-widest text-white transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98] sm:px-10 sm:py-3.5 sm:text-sm md:px-12 md:py-4 md:text-base ${className}`}
+      type={type}
+      className={`rounded-full px-8 py-3 text-xs font-medium uppercase tracking-widest text-white transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60 disabled:hover:scale-100 sm:px-10 sm:py-3.5 sm:text-sm md:px-12 md:py-4 md:text-base ${className}`}
       style={{
         background:
           'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
@@ -15,8 +23,9 @@ export default function ContactButton({ className = '' }: ContactButtonProps) {
         outline: '2px solid #FFFFFF',
         outlineOffset: '-3px',
       }}
+      {...props}
     >
-      Contact Me
+      {children}
     </button>
   );
 }
